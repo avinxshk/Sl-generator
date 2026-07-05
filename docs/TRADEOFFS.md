@@ -157,3 +157,29 @@ similarity of the *body content* adds retrieval value.
 
 **Cost accepted:** Misses semantically similar campaigns with different intent
 labels; depends on tagging quality. Fixed intent taxonomy (PRD §4) mitigates.
+
+---
+
+## T-011 — No LLM body summarization in v1
+
+**Decision:** The campaign body is truncated to ~150 words for prompt context
+rather than summarized by a separate LLM call.
+
+**Alternatives rejected:** Pre-summarization call (extra latency + cost per
+generation); sending the full body (token waste, dilutes the prompt).
+
+**Cost accepted:** Very long emails lose tail context; a key offer buried at
+the bottom could be missed. Revisit if rationale quality suffers.
+
+---
+
+## T-012 — Single generation call per segment
+
+**Decision:** One Claude call produces all 6 candidates for a segment, with
+tone diversity enforced by instruction plus a post-hoc diversity check and one
+regeneration round.
+
+**Alternatives rejected:** One call per tone (6× cost/latency for marginal
+diversity gain); parallel calls with dedup (complexity without evidence of need).
+
+**Cost accepted:** Occasional regeneration round when the model under-diversifies.
