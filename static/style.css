@@ -9,6 +9,7 @@ code { background: #eef1f5; padding: 1px 5px; border-radius: 4px; }
 .hidden { display: none !important; }
 
 .demo-banner { background: #103a75; color: #dbe7ff; padding: 8px 20px; font-size: 13px; }
+.demo-banner code { color: #103a75; }
 .layout { display: flex; min-height: 100vh; }
 .sidebar { width: 200px; background: #14202e; padding: 20px 0; flex-shrink: 0; }
 .sidebar h1 { color: #fff; font-size: 17px; padding: 0 20px 16px; }

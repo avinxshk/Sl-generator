@@ -1,6 +1,7 @@
 """FastAPI app: REST API + static SPA serving."""
 import json
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
@@ -14,12 +15,13 @@ from .taxonomy import INTENTS, TONES
 MAX_ACCEPTED = 2  # A/B limit (T-008)
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "..", "static")
 
-app = FastAPI(title="SL Generator")
-
-
-@app.on_event("startup")
-def _startup() -> None:
+@asynccontextmanager
+async def _lifespan(app: FastAPI):
     seed.seed()
+    yield
+
+
+app = FastAPI(title="SL Generator", lifespan=_lifespan)
 
 
 # ------------------------------------------------------------- request models

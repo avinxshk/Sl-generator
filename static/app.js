@@ -228,8 +228,9 @@ async function viewCampaignDetail(id) {
       `<div class="empty">No candidates generated yet.</div>`}`;
   camp.segments.forEach((s) => {
     const form = $(`#outcome-${s.segment.id}`);
-    if (!form) return;
-    $(`#save-${s.segment.id}`).onclick = async () => {
+    const saveBtn = $(`#save-${s.segment.id}`);
+    if (!form || !saveBtn) return; // no accepted candidates, or all outcomes already logged
+    saveBtn.onclick = async () => {
       const results = [...form.querySelectorAll("[data-cand]")].map((inp) => ({
         candidate_id: +inp.dataset.cand,
         open_rate: parseFloat(inp.value),
