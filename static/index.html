@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SL Generator</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div id="demo-banner" class="demo-banner hidden">
+    Running in <strong>demo mode</strong> — candidates are canned examples.
+    Set <code>ANTHROPIC_API_KEY</code> for live generation.
+  </div>
+  <div class="layout">
+    <nav class="sidebar">
+      <h1>SL Generator</h1>
+      <a href="#new" data-view="new">New Campaign</a>
+      <a href="#campaigns" data-view="campaigns">Campaigns</a>
+      <a href="#history" data-view="history">History</a>
+      <a href="#segments" data-view="segments">Segments</a>
+      <a href="#brand" data-view="brand">Brand Voice</a>
+    </nav>
+    <main id="main"></main>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
