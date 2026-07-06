@@ -183,7 +183,11 @@ def _call_claude(system: str, user_msgs: list[dict]) -> str:
     resp = client.messages.create(
         model=MODEL, max_tokens=2000, system=system, messages=user_msgs,
     )
-    return resp.content[0].text
+    # Skip thinking blocks; grab the first text block.
+    for block in resp.content:
+        if hasattr(block, "text"):
+            return block.text
+    raise ValueError("no text block in model response")
 
 
 def _distinct_tones(cands: list[dict]) -> int:
